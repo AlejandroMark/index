@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserva Premium | WhatsApp</title>
+    
+    <!-- Fontes Premium do Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Ícones FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            /* Imagem de fundo luxuosa de um hotel (Unsplash) */
+            background: linear-gradient(rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.8)), 
+                        url('https://images.unsplash.com/photo-1542314831-c53cd453a5ce?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+            overflow: hidden;
+        }
+
+        /* Efeito de Vidro Fosco (Glassmorphism) */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 50px 40px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            transform: translateY(0);
+            animation: floatUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+
+        @keyframes floatUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: #d4af37; /* Dourado luxo */
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            font-size: 14px;
+            color: #cbd5e1;
+            font-weight: 300;
+        }
+
+        /* Container de Input com Floating Label */
+        .input-box {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .input-box input {
+            width: 100%;
+            padding: 10px 0;
+            font-size: 16px;
+            color: #ffffff;
+            border: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            outline: none;
+            background: transparent;
+            font-family: 'Poppins', sans-serif;
+            transition: border-color 0.3s ease;
+        }
+
+        /* Tratamento especial para o input de data manter a cor do ícone padrão */
+        .input-box input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.3s;
+        }
+
+        .input-box input[type="date"]::-webkit-calendar-picker-indicator:hover {
+            opacity: 1;
+        }
+
+        .input-box label {
+            position: absolute;
+            top: 10px;
+            left: 0;
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.6);
+            pointer-events: none;
+            transition: 0.3s ease all;
+            font-weight: 300;
+        }
+
+        /* Animação do Floating Label */
+        .input-box input:focus ~ label,
+        .input-box input:valid ~ label,
+        .input-box input[type="date"] ~ label {
+            top: -20px;
+            font-size: 12px;
+            color: #d4af37;
+            font-weight: 500;
+        }
+
+        .input-box input:focus {
+            border-bottom: 1px solid #d4af37;
+        }
+
+        /* Ícones posicionados à direita */
+        .input-icon {
+            position: absolute;
+            right: 0;
+            top: 10px;
+            color: rgba(255, 255, 255, 0.4);
+            transition: 0.3s ease;
+        }
+
+        .input-box input:focus ~ .input-icon {
+            color: #d4af37;
+        }
+
+        /* Botão Premium */
+        .btn-submit {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px -5px rgba(37, 211, 102, 0.4);
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 25px -5px rgba(37, 211, 102, 0.5);
+        }
+
+        .btn-submit:active {
+            transform: translateY(1px);
+        }
+
+        .btn-submit i {
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glass-card">
+        <div class="header">
+            <h1>The Grand Hotel</h1>
+            <p>Confirmação de Experiência</p>
+        </div>
+
+        <form id="reservaForm">
+            <div class="input-box">
+                <input type="text" id="nome" name="nome" required>
+                <label>Nome do Hóspede</label>
+                <i class="fa-regular fa-user input-icon"></i>
+            </div>
+            
+            <div class="input-box">
+                <input type="tel" id="numero" name="numero" required>
+                <label>WhatsApp (Ex: 5527999999999)</label>
+                <i class="fa-brands fa-whatsapp input-icon"></i>
+            </div>
+            
+            <div class="input-box">
+                <input type="date" id="data" name="data" required>
+                <label>Data de Check-in</label>
+            </div>
+            
+            <button type="submit" class="btn-submit">
+                <i class="fa-brands fa-whatsapp"></i>
+                Enviar Confirmação
+            </button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("reservaForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            const btn = document.querySelector('.btn-submit');
+            const nome = document.getElementById("nome").value.trim();
+            const numero = document.getElementById("numero").value.replace(/\D/g, ""); 
+            const dataInput = document.getElementById("data").value;
+
+            // Formatação de data
+            const partesData = dataInput.split('-');
+            const dataFormatada = `${partesData[2]}/${partesData[1]}/${partesData[0]}`;
+
+            // Mensagem elegante
+            const mensagem = `Olá, *${nome}*.\n\nÉ um prazer tê-lo(a) conosco!\nSua estadia a partir de *${dataFormatada}* está confirmada.\n\nNossa equipe está preparando tudo para que sua experiência seja impecável. Até breve! ✨`;
+            
+            const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
+
+            // Efeito visual rápido no botão antes de abrir o WhatsApp
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Conectando...';
+            
+            setTimeout(() => {
+                window.open(url, "_blank");
+                // Reseta o botão após abrir
+                btn.innerHTML = '<i class="fa-brands fa-whatsapp"></i> Enviar Confirmação';
+                document.getElementById("reservaForm").reset();
+            }, 800);
+        });
+    </script>
+</body>
+</html>
